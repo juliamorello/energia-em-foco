@@ -75,8 +75,8 @@ def home():
                         try:
                             storage.register(u,p);st.success('Conta criada! Entre na aba Entrar usando seu usuário e senha.')
                         except ValueError as e: st.warning(str(e))
-                        except Exception as e:
-                            st.error(f'Erro ao cadastrar: {type(e).__name__}: {e}')
+                        except Exception:
+                            st.error('Erro ao cadastrar. Tente novamente mais tarde.')
     st.info('Sem e-mail, não é possível recuperar automaticamente a senha. Guarde suas credenciais. Você pode excluir a conta e exportar seus dados.')
     if not storage.cloud(): st.caption('Executando com banco local SQLite. Para que contas funcionem no site publicado, configure o Supabase conforme o guia.')
 
