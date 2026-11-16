@@ -10,7 +10,9 @@ def cloud():
         url=st.secrets.get('SUPABASE_URL',os.getenv('SUPABASE_URL',''))
         key=st.secrets.get('SUPABASE_SERVICE_ROLE_KEY',os.getenv('SUPABASE_SERVICE_ROLE_KEY',''))
         return create_client(url,key) if url and key else None
-    except Exception: return None
+        except Exception as e:
+        print(f"Erro ao conectar ao Supabase: {type(e).__name__}: {e}", flush=True)
+        raise RuntimeError("Não foi possível conectar ao banco online.") from e
 
 def conn():
     c=sqlite3.connect(DB,timeout=10)
